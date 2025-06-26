@@ -16,7 +16,8 @@ all: $(NAME)
 	$(CC) $(CFLAGS) -o $@ $<
 
 $(NAME): $(OBJS)
-#	 $(CC) $(CFLAGS) -o $@ $(OBJS)
+	$(CC) $(CFLAGS) -o $@ $(OBJS)
+# ld -m elf_x86_64 test.o
 
 clean:
 	@$(RM) $(OBJS)
