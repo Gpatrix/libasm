@@ -21,7 +21,7 @@ _start:
     ;; Get the sum of rax and rbx. The result is stored in rax.
     add rax, rbx
 
-    ; jmp .compare
+    jmp .compare
 
     ret
 

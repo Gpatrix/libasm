@@ -21,6 +21,7 @@ _start:
 
     ;; Call the `sys_write` system call.
     syscall
+
     ;; Specify the number of the system call (60 is `sys_exit`).
     mov    rax, 60
     ;; Set the first argument of `sys_exit` to 0. The 0 status code is success.
