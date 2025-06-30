@@ -1,4 +1,4 @@
-CC		= nasm
+CASM	= nasm
 CFLAGS	= -f elf64 -Wx -Werror
 LFLAGS	= -m elf_x86_64
 
@@ -6,25 +6,34 @@ RM		= rm -f
 
 NAME	= libasm.a
 
-FILE	= srcs/test.s
+MANDATORY_SRCS_DIR = mandatory
 
-OBJS	= $(FILE:.s=.o)
+MANDATORY_SRCS_FILE = test.s
+
+MANDATORY_SRCS = $(addprefix $(MANDATORY_SRCS_DIR)/, $(MANDATORY_SRCS_FILE))
+
+MANDATORY_OBJS	= $(MANDATORY_SRCS:.s=.o)
 
 all: $(NAME)
 
 %.o: %.s
-	$(CC) $(CFLAGS) -o $@ $<
+	$(CASM) $(CFLAGS) -o $@ $<
 
-$(NAME): $(OBJS)
-	$(CC) $(CFLAGS) -o $@ $(OBJS)
-# ld -m elf_x86_64 test.o
+$(NAME): $(MANDATORY_OBJS)
+	ar -rcs $@ $^
+
+bonus:
+
+tester: all
+	cc -o tester tester.c -L. -l:libasm.a
 
 clean:
-	@$(RM) $(OBJS)
+	@$(RM) $(MANDATORY_OBJS)
 
 fclean:		clean
 	@$(RM) $(NAME)
+	@$(RM) tester
 
 re:			fclean $(NAME)
 
-.PHONY:		all clean fclean re
+.PHONY:		all clean fclean re tester bonus
