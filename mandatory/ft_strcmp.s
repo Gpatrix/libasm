@@ -24,7 +24,7 @@ ft_strcmp:
     ret
 
 .return_same:
-    xor rax, rax
+    xor eax, eax
     ret
 
 section .note.GNU-stack noalloc noexec nowrite progbits
