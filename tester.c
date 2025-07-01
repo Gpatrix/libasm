@@ -5,6 +5,10 @@
 
 int main(void)
 {
-	printf("%lu\n", ft_strlen(NULL));
+	char src[10] = "le test 1\0";
+	char dst[10];
+	ft_strcpy(dst, src);
+	printf("src: %s\n", src);
+	// printf("dst: %s", dst);
 	return 0;
 }
