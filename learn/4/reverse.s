@@ -29,7 +29,7 @@ section .text
 ;; Entry point of the program.
 _start:
         ;; Set the rcx value to 0. It will be used as a storage for the input string length.
-        xor rcx, rcx
+        xor dl, dl
         ;; Store the address of the input string in the rsi register.
         mov rsi, INPUT
         ;; Store the address of the output buffer in the rdi register.
@@ -42,7 +42,7 @@ reverseStringAndPrint:
         ;; Compare the first element in the given string with the NUL terminator (end of the string).
         cmp byte [rsi], 0
         ;; Preserve the length of the reversed string in the rdx register. We will use this value when printing the string.
-        mov rdx, rcx
+        mov cl, dl
         ;; If we reached the end of the input string, reverse it.
         je reverseString
         ;; Load a byte from the rsi to al register and move pointer to the next character in the string.
@@ -50,7 +50,7 @@ reverseStringAndPrint:
         ;; Save the character of the input string on the stack.
         push rax
         ;; Increase the counter that stores the length of our input string.
-        inc rcx
+        inc dl
         ;; Continue to go over the input string if we did not reach its end.
         jmp reverseStringAndPrint
 
@@ -58,7 +58,7 @@ reverseStringAndPrint:
 ;; Reverse the string and store it in the output buffer.
 reverseString:
         ;; Check the counter that stores the length of the string.
-        cmp rcx, 0
+        cmp dl, 0
         ;; If it is equal to `0`, print the reverse string.
         je printResult
         ;; Pop the character from the stack.
@@ -68,7 +68,7 @@ reverseString:
         ;; Move the pointer to the next character in the output buffer.
         inc rdi
         ;; Decrease the counter of the length of the string.
-        dec rcx
+        dec dl
         ;; Move to the next character until we reach the end of the string.
         jmp reverseString
 
@@ -84,7 +84,7 @@ printResult:
         syscall
 
         ;; Set the length of the result string to print.
-        mov rdx, NEW_LINE_LEN
+        mov cl, NEW_LINE_LEN
         ;; Specify the system call number (1 is `sys_write`).
         mov rax, SYS_WRITE
         ;; Set the first argument of `sys_write` to 1 (`stdout`).

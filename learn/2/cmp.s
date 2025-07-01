@@ -51,7 +51,7 @@ _start:
     ;; Set the second argument of `sys_write` to the reference of the `msg` variable.
     mov rsi, msg
     ;; Set the third argument to the length of the `msg` variable's value (20 bytes).
-    mov rdx, 20
+    mov cl, 20
     ;; Call the `sys_write` system call.
     syscall
     ;; Go to the exit of the program.

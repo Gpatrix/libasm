@@ -23,9 +23,9 @@ section .text
 ;; Entry point
 _start:
 	;; Fetch the number of arguments from the stack and store it in the rcx register.
-	pop rcx
+	pop dl
 	;; Check the number of the given command-line arguments.
-	cmp rcx, 3
+	cmp dl, 3
 	;; If not enough, jump to the error subroutine.
 	jne argcError
 
@@ -51,7 +51,7 @@ _start:
 	;; Move the sum value to the rax register.
 	mov rax, r10
 	;; Initialize counter by resetting it to 0. It will store the length of the result string.
-	xor rcx, rcx
+	xor dl, dl
 	;; Convert the sum from a number to a string to print the result to the standard output.
 	jmp int_to_str
 
@@ -64,7 +64,7 @@ argcError:
 	;; Set the second argument of `sys_write` to the reference of the `WRONG_ARGC_MSG` variable.
 	mov rsi, WRONG_ARGC_MSG
 	;; Set the third argument to the length of the `WRONG_ARGC_MSG` variable's value.
-	mov rdx, WRONG_ARGC_MSG_LEN
+	mov cl, WRONG_ARGC_MSG_LEN
 	;; Call the `sys_write` system call.
 	syscall
 	;; Go to the exit of the program.
@@ -75,19 +75,19 @@ str_to_int:
 	;; Set the value of the rax register to 0. It will store the result.
 	xor rax, rax
 	;; Base for multiplication
-	mov rcx,  10
+	mov dl,  10
 __repeat:
 	;; Compare the first element in the given string with the NUL terminator (end of the string).
 	cmp [rsi], byte 0
 	;; If we reached the end of the string, return from the procedure. The result is stored in the rax register.
 	je __return
 	;; Move the current character from the command-line argument to the bl register.
-	mov r9b, [rsi]
+	mov dl, [rsi]
 	;; Subtract the value 48 from the ASCII code of the current character.
 	;; This will give us the numeric value of the character.
-	sub r9b, 48
+	sub dl, 48
 	;; Multiple our result number by 10 to get the place for the next digit.
-	mul rcx
+	mul dl
 	;; Add the next digit to our result number.
 	add rax, rbx
 	;; Move to the next character in the command-line argument string.
@@ -101,18 +101,18 @@ __return:
 ;; Convert the sum to a string and print it to the standard output.
 int_to_str:
 	;; High part of the dividend. The low part is in the rax register.
-	mov rdx, 0
+	mov cl, 0
 	;; Set the divisor to 10.
 	mov rbx, 10
 	;; Divide the sum stored in `rax`, resulting quotient will be stored in `rax`,
 	;; and the reminder will be stored in `rdx` register.
 	div rbx
 	;; Add 48 to the reminder to get a string ASCII representation of the number value.
-	add rdx, 48
+	add cl, 48
 	;; Store the reminder on the stack.
-	push rdx
+	push cl
 	;; Increase the counter.
-	inc rcx
+	inc dl
 	;; Compare the rest of the sum with zero.
 	cmp rax, 0x0
 	;; If it is not zero, continue to convert it to string.
@@ -123,15 +123,15 @@ int_to_str:
 ;; Print the result to the standard output.
 printResult:
 	;; Put the number of string characters to the rax register.
-	mov rax, rcx
+	mov rax, dl
 	;; Put the value 8 to the rcx register.
-	mov rcx, 8
+	mov dl, 8
 	;; Calculate the number of bytes in the given string by multiplying rax by 8.
 	;; The result will be stored in the rax register.
-	mul rcx
+	mul dl
 
 	;; Set the third argument to the length of the result string to print.
-	mov rdx, rax
+	mov cl, rax
 	;; Specify the system call number (1 is `sys_write`).
 	mov rax, SYS_WRITE
 	;; Set the first argument of `sys_write` to 1 (`stdout`).
@@ -148,7 +148,7 @@ printResult:
 	;; Set the second argument of `sys_write` to the reference of the `NWE_LINE` variable.
 	mov rsi, NEW_LINE
 	;; Set the third argument to the length of the `NEW_LINE` variable's value (1 byte).
-	mov rdx, 1
+	mov cl, 1
 	;; Call the `sys_write` system call.
 	syscall
 

@@ -5,13 +5,13 @@ ft_strcmp:
 
 .loop:
 
-    mov r8b, [rdi]
-    mov r9b, [rsi]
+    mov cl, [rdi]
+    mov dl, [rsi]
 
-    cmp r8b, r9b
+    cmp cl, dl
     jne .return_diff
 
-    test r8b, r8b
+    test cl, cl
     je .return_same
 
     inc rdi
@@ -19,8 +19,8 @@ ft_strcmp:
     jmp .loop
 
 .return_diff:
-    sub r8b, r9b
-    movsx eax, r8b
+    sub cl, dl
+    movsx eax, cl
     ret
 
 .return_same:

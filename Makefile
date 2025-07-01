@@ -7,7 +7,7 @@ NAME	= libasm.a
 
 MANDATORY_SRCS_DIR = mandatory
 
-MANDATORY_SRCS_FILE = ft_strlen.s ft_strcpy.s ft_strcmp.s
+MANDATORY_SRCS_FILE = ft_strlen.s ft_strcpy.s ft_strcmp.s ft_strdup.s
 
 MANDATORY_SRCS = $(addprefix $(MANDATORY_SRCS_DIR)/, $(MANDATORY_SRCS_FILE))
 
@@ -16,7 +16,7 @@ MANDATORY_OBJS	= $(MANDATORY_SRCS:.s=.o)
 all: $(NAME)
 
 %.o: %.s
-	$(CASM) $(CFLAGS) -o $@ $<
+	$(CASM) $(CFLAGS) -I $(MANDATORY_SRCS_DIR)/ -o $@ $<
 
 $(NAME): $(MANDATORY_OBJS)
 	ar -rcs $@ $^
