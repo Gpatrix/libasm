@@ -1,3 +1,4 @@
 #pragma oncex
 
-extern int __hello(void);
+size_t ft_strlen(const char *s);
+

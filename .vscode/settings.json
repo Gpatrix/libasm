@@ -1,6 +1,7 @@
 {
 	"files.associations": {
 		"libasm_bonus.h": "c",
-		"libasm.h": "c"
+		"libasm.h": "c",
+		"stdio.h": "c"
 	}
 }

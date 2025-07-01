@@ -1,6 +1,5 @@
 CASM	= nasm
 CFLAGS	= -f elf64 -Wx -Werror
-LFLAGS	= -m elf_x86_64
 
 RM		= rm -f
 
@@ -8,7 +7,7 @@ NAME	= libasm.a
 
 MANDATORY_SRCS_DIR = mandatory
 
-MANDATORY_SRCS_FILE = test.s
+MANDATORY_SRCS_FILE = ft_strlen.s
 
 MANDATORY_SRCS = $(addprefix $(MANDATORY_SRCS_DIR)/, $(MANDATORY_SRCS_FILE))
 
