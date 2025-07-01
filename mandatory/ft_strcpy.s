@@ -9,7 +9,6 @@ ft_strcpy:
     cmp [rsi], byte 0
     je .terminator
 
-
     movsb
     jmp .loop
 

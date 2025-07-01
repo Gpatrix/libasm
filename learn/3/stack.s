@@ -82,10 +82,10 @@ __repeat:
 	;; If we reached the end of the string, return from the procedure. The result is stored in the rax register.
 	je __return
 	;; Move the current character from the command-line argument to the bl register.
-	mov bl, [rsi]
+	mov r9b, [rsi]
 	;; Subtract the value 48 from the ASCII code of the current character.
 	;; This will give us the numeric value of the character.
-	sub bl, 48
+	sub r9b, 48
 	;; Multiple our result number by 10 to get the place for the next digit.
 	mul rcx
 	;; Add the next digit to our result number.

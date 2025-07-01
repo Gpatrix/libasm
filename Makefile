@@ -7,7 +7,7 @@ NAME	= libasm.a
 
 MANDATORY_SRCS_DIR = mandatory
 
-MANDATORY_SRCS_FILE = ft_strlen.s ft_strcpy.s
+MANDATORY_SRCS_FILE = ft_strlen.s ft_strcpy.s ft_strcmp.s
 
 MANDATORY_SRCS = $(addprefix $(MANDATORY_SRCS_DIR)/, $(MANDATORY_SRCS_FILE))
 
@@ -24,7 +24,7 @@ $(NAME): $(MANDATORY_OBJS)
 bonus:
 
 tester: $(NAME)
-	cc -o tester tester.c -L. -l:libasm.a
+	cc -g -o tester tester.c -L. -l:libasm.a
 
 clean:
 	@$(RM) $(MANDATORY_OBJS)
