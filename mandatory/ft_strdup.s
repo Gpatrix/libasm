@@ -1,10 +1,10 @@
 global ft_strdup
 
-%include "ft_strlen.s"
-%include "ft_strcpy.s"
-extern malloc
-
 section .text
+    extern malloc
+    extern ft_strlen
+    extern ft_strcpy
+
 ft_strdup:
     push    rbp
     mov     rbp, rsp
@@ -12,9 +12,10 @@ ft_strdup:
     push rdi;
     call ft_strlen
 
-    add rax, 1
+    inc rax
     mov rdi, rax
-    call malloc ; PLT
+    ; call malloc ; no PLT
+    call malloc wrt ..plt
 
     mov rdi, rax
     pop rsi

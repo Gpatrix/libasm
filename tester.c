@@ -1,7 +1,7 @@
 #include <stdio.h>
-// #include <stdlib.h>
-// #include <unistd.h>
-// #include <string.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include <string.h>
 #include "mandatory/libasm.h"
 #include "bonus/libasm_bonus.h"
 
@@ -13,6 +13,6 @@ int main(int argc, char const *argv[])
 
 	printf("%s\n", out);
 
-	// free(out);
+	free(out);
 	return 0;
 }

@@ -16,15 +16,16 @@ MANDATORY_OBJS	= $(MANDATORY_SRCS:.s=.o)
 all: $(NAME)
 
 %.o: %.s
-	$(CASM) $(CFLAGS) -I $(MANDATORY_SRCS_DIR)/ -o $@ $<
+	$(CASM) $(CFLAGS) -o $@ $<
 
 $(NAME): $(MANDATORY_OBJS)
 	ar -rcs $@ $^
+	ranlib $@
 
 bonus:
 
 tester: $(NAME)
-	cc -g -o tester tester.c -L. -l:libasm.a
+	gcc -g -o tester tester.c -L. -l:libasm.a
 
 clean:
 	@$(RM) $(MANDATORY_OBJS)
