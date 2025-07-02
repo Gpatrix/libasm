@@ -14,7 +14,7 @@ ft_strdup:
 
     add rax, 1
     mov rdi, rax
-    call malloc
+    call malloc ; PLT
 
     mov rdi, rax
     pop rsi

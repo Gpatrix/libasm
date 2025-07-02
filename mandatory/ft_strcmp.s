@@ -1,5 +1,5 @@
 global ft_strcmp
-; TODO to test with school strcmp
+
 section .text
 ft_strcmp:
 
