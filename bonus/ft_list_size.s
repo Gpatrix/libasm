@@ -1,7 +1,5 @@
 ; int ft_list_size(t_list *begin_list);
 
-
-
 extern malloc
 %include "s_list.s"
 

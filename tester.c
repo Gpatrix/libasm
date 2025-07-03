@@ -6,23 +6,40 @@
 #include "mandatory/libasm.h"
 #include "bonus/libasm_bonus.h"
 
-// ft_list_push_front
+// ft_list_sort
 int main(int argc, char const *argv[])
 {
     t_list *list = NULL;
-    int var = 42;
-   
+    char v1[] = "42";
+    char v2[] = "10";
+    char v3[] = "50";
 
-    ft_list_push_front(&list, &var);
-    ft_list_push_front(&list, &var);
-    ft_list_push_front(&list, &var);
-    ft_list_push_front(&list, &var);
-    ft_list_push_front(&list, &var);
+    ft_list_push_front(&list, &v1[0]);
+    ft_list_push_front(&list, &v2[0]);
+    ft_list_push_front(&list, &v3[0]);
 
-    printf("%i\n", ft_list_size(list));
+    ft_list_sort(&list, ft_strcmp);
 
     return (0);
 }
+
+// // ft_list_push_front
+// int main(int argc, char const *argv[])
+// {
+//     t_list *list = NULL;
+//     int var = 42;
+   
+
+//     ft_list_push_front(&list, &var);
+//     ft_list_push_front(&list, &var);
+//     ft_list_push_front(&list, &var);
+//     ft_list_push_front(&list, &var);
+//     ft_list_push_front(&list, &var);
+
+//     printf("%i\n", ft_list_size(list));
+
+//     return (0);
+// }
 
 
 // ft_list_push_front
