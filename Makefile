@@ -24,6 +24,7 @@ $(NAME): $(MANDATORY_OBJS)
 
 bonus:
 
+# TODO relink
 tester: $(NAME)
 	gcc -g -o tester tester.c -L. -l:libasm.a
 

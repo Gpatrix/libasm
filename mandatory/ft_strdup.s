@@ -1,29 +1,39 @@
 global ft_strdup
 
+extern malloc
+extern ft_strlen
+extern ft_strcpy
+extern __errno_location
+
 section .text
-    extern malloc
-    extern ft_strlen
-    extern ft_strcpy
 
 ft_strdup:
     push    rbp
     mov     rbp, rsp
 
-    push rdi
+    sub rsp, 16
+    mov QWORD [rsp+8], rdi
     call ft_strlen
 
     inc rax
     mov rdi, rax
 
-    sub rsp, 0x8
     call malloc wrt ..plt
-    add rsp, 0x8
+    test rax, rax
+    jz .ENOMEM
 
     mov rdi, rax
-    pop rsi
+    mov rsi, QWORD [rsp+8]
     call ft_strcpy
+    jmp .return
+
+.ENOMEM:
+    call __errno_location wrt ..plt
+    mov DWORD [rax], 12
+    mov rax, 0
 
 .return:
+    add rsp, 16
     pop rbp
     ret
 
