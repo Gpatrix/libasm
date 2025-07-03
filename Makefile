@@ -23,8 +23,11 @@ BONUS_OBJS	= $(BONUS_SRCS:.s=.o)
 
 all: $(NAME)
 
-%.o: %.s
-	$(CASM) $(CFLAGS) -o $@ $<
+$(MANDATORY_SRCS_DIR)/%.o: $(MANDATORY_SRCS_DIR)/%.s
+	$(CASM) $(CFLAGS) -I mandatory/ -o $@ $<
+
+$(BONUS_SRCS_DIR)/%.o: $(BONUS_SRCS_DIR)/%.s
+	$(CASM) $(CFLAGS) -I bonus/ -o $@ $<
 
 $(NAME): $(MANDATORY_OBJS)
 	ar -rcs $@ $^
@@ -40,7 +43,7 @@ tester: bonus
 
 clean:
 	@$(RM) $(MANDATORY_OBJS)
-	@$(RM) $(MANDATORY_OBJS)
+	@$(RM) $(BONUS_OBJS)
 
 fclean:		clean
 	@$(RM) $(NAME)

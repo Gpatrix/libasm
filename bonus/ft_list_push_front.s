@@ -1,11 +1,9 @@
 ; void ft_list_push_front(t_list **begin_list, void *data);
 
-extern malloc
-struc s_list
-        .data resb 8
-        .next resb 8
-endstruc
 
+
+extern malloc
+%include "s_list.s"
 
 global ft_list_push_front
 
