@@ -1,7 +1,10 @@
 {
 	"files.associations": {
-		"libasm_bonus.h": "c",
-		"libasm.h": "c",
-		"stdio.h": "c"
-	}
+        "*.tpp": "cpp",
+        "libasm_bonus.h": "c",
+        "libasm.h": "c",
+        "stdio.h": "c",
+        "stdlib.h": "c",
+        "unistd.h": "c"
+    }
 }

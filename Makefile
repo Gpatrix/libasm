@@ -7,7 +7,7 @@ NAME	= libasm.a
 
 MANDATORY_SRCS_DIR = mandatory
 
-MANDATORY_SRCS_FILE = ft_strlen.s ft_strcpy.s ft_strcmp.s ft_strdup.s
+MANDATORY_SRCS_FILE = ft_strlen.s ft_strcpy.s ft_strcmp.s ft_strdup.s ft_write.s
 
 MANDATORY_SRCS = $(addprefix $(MANDATORY_SRCS_DIR)/, $(MANDATORY_SRCS_FILE))
 

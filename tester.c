@@ -7,14 +7,14 @@
 
 int main(int argc, char const *argv[])
 {
-	char test[] = "hi all its me\0";
+	char test[] = "test 54\n\0";
+    int fd = 2;
 
-	char *out = ft_strdup(test);
-    if (out == NULL)
-        return (perror("errno"), 1);
+    ssize_t ft_rc = ft_write(fd, test, ft_strlen(test));
+    perror("ft_ ");
+    ssize_t real_rc =  write(fd, test, ft_strlen(test));
+    perror("real");
+    printf("r : %li\nft: %li\n",real_rc, ft_rc);
 
-	printf("%s\n", out);
-
-	free(out);
-	return 0;
+    return (0);
 }

@@ -17,7 +17,6 @@ ft_strdup:
 
     inc rax
     mov rdi, rax
-
     call malloc wrt ..plt
     test rax, rax
     jz .ENOMEM
