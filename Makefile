@@ -13,6 +13,14 @@ MANDATORY_SRCS = $(addprefix $(MANDATORY_SRCS_DIR)/, $(MANDATORY_SRCS_FILE))
 
 MANDATORY_OBJS	= $(MANDATORY_SRCS:.s=.o)
 
+BONUS_SRCS_DIR = bonus
+
+BONUS_SRCS_FILE = ft_list_push_front.s
+
+BONUS_SRCS = $(addprefix $(BONUS_SRCS_DIR)/, $(BONUS_SRCS_FILE))
+
+BONUS_OBJS	= $(BONUS_SRCS:.s=.o)
+
 all: $(NAME)
 
 %.o: %.s
@@ -22,13 +30,16 @@ $(NAME): $(MANDATORY_OBJS)
 	ar -rcs $@ $^
 	ranlib $@
 
-bonus:
+bonus: $(NAME) $(BONUS_OBJS)
+	ar -rcs $(NAME) $(BONUS_OBJS)
+	ranlib $(NAME)
 
-# TODO relink
-tester: $(NAME)
+# TODO it relink
+tester: bonus
 	gcc -g -o tester tester.c -L. -l:libasm.a
 
 clean:
+	@$(RM) $(MANDATORY_OBJS)
 	@$(RM) $(MANDATORY_OBJS)
 
 fclean:		clean

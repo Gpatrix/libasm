@@ -7,6 +7,23 @@
 #include "bonus/libasm_bonus.h"
 
 
+// ft_list_push_front
+int main(int argc, char const *argv[])
+{
+    t_list *list = NULL;
+    int var = 42;
+
+    ft_list_push_front(&list, &var);
+    int vv = 55;
+    ft_list_push_front(&list, &vv);
+
+    printf("data1: %i\n", *(int *)list->data);
+    printf("data2: %i\n", *(int *)list->next->data);
+
+    free(list->next);
+    free(list);
+    return (0);
+}
 
 
 // //read
