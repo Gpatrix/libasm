@@ -15,7 +15,7 @@ MANDATORY_OBJS	= $(MANDATORY_SRCS:.s=.o)
 
 BONUS_SRCS_DIR = bonus
 
-BONUS_SRCS_FILE = ft_list_push_front.s
+BONUS_SRCS_FILE = ft_list_push_front.s ft_list_size.s
 
 BONUS_SRCS = $(addprefix $(BONUS_SRCS_DIR)/, $(BONUS_SRCS_FILE))
 
