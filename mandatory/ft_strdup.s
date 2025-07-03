@@ -15,12 +15,9 @@ ft_strdup:
     inc rax
     mov rdi, rax
 
-    ; stack is currently 0x*08, needs to be 0x*10
-    sub rsp, 0x8 
-    ; mallocs crashes here:  => 0x7ffff7e1f4c0 <_int_malloc+2832>:   movaps %xmm1,0x10(%rsp)
-    ; https://www.gladir.com/LEXIQUE/ASM/movaps.htm
+    sub rsp, 0x8
     call malloc wrt ..plt
-    add rsp, 0x8 ; restore
+    add rsp, 0x8
 
     mov rdi, rax
     pop rsi
