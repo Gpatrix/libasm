@@ -10,15 +10,18 @@
 int main(int argc, char const *argv[])
 {
     t_list *list = NULL;
-    char v1[] = "42";
+    char v1[] = "50";
     char v2[] = "10";
-    char v3[] = "50";
+    char v3[] = "42";
 
     ft_list_push_front(&list, &v1[0]);
     ft_list_push_front(&list, &v2[0]);
     ft_list_push_front(&list, &v3[0]);
 
     ft_list_sort(&list, ft_strcmp);
+
+    printf("1: %s\n2: %s\n3: %s\n",
+        (char*)list->data, (char*)list->next->data, (char*)list->next->next->data);
 
     return (0);
 }
