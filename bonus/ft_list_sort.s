@@ -11,21 +11,26 @@ ft_list_sort:
     push rbp
     mov rbp, rsp
     push r11 ; ptr to fonction
-    push r12 ; original pointer
+    push r12 ; original double pointer
     push r13 ; 1nd s_list
-    push r14 ; 1nd s_list
+    push r14 ; 2nd s_list
+    push r15 ; 2nd s_list prev
 
-    mov r12, rdi
-    mov r13, [rdi]
     mov r11, rsi
+    mov r12, rdi
+    mov r13, [r12]
+    mov r14, r13
+    mov r15, r13
 
 .base_sort:
 
-    mov rdi, [r13] ; data
-    mov r14, [r13 + s_list.next]
+    mov r15, r14
+    mov r14, QWORD [r14 + s_list.next]
     test r14, r14
     jz .loop
-    mov rdi, [r14] ; data
+
+    mov rdi, QWORD [r13] ; data pointer
+    mov rsi, QWORD [r14] ; data pointer
     call r11
 
     cmp rax, 0
@@ -33,13 +38,18 @@ ft_list_sort:
     jmp .base_sort
 
 .base_swap:
-    mov rcx, QWORD [r14 + s_list.next]
-    mov QWORD [r13 + s_list.next], rcx
-
-    mov QWORD [r14 + s_list.next], r13
+    mov rdi, QWORD [r13 + s_list.next]
+    mov rsi, QWORD [r14 + s_list.next]
+    mov QWORD [r14 + s_list.next], rdi
+    mov QWORD [r13 + s_list.next], rsi
+    mov QWORD [r15 + s_list.next], r13
 
     mov QWORD [r12], r14
 
+    mov rax, r13
+    mov r13, r14
+    mov r14, rax
+    jmp .base_sort
 
 .loop:
 ;     .iner_loop:
@@ -49,6 +59,7 @@ ft_list_sort:
 ;     mov r13, [r12 + s_list.next]
 
 .return:
+    pop r15
     pop r14
     pop r13
     pop r12
