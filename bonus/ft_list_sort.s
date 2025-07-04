@@ -10,41 +10,47 @@ section .text
 ft_list_sort:
     push rbp
     mov rbp, rsp
-    push r11
-    push r12
-    sub rsp, 16
+    push r11 ; ptr to fonction
+    push r12 ; original pointer
+    push r13 ; 1nd s_list
+    push r14 ; 1nd s_list
 
-    mov QWORD [rbp-8], rdi
-    mov r12, [rdi]
-    mov rdx, rdi
+    mov r12, rdi
+    mov r13, [rdi]
     mov r11, rsi
 
-    mov rdi, [rdx]
-    mov rsi, [rdx + s_list.next]
-    mov rsi, [rsi]
+.base_sort:
+
+    mov rdi, [r13] ; data
+    mov r14, [r13 + s_list.next]
+    test r14, r14
+    jz .loop
+    mov rdi, [r14] ; data
     call r11
+
     cmp rax, 0
-    jg .loop
+    jg .base_swap
+    jmp .base_sort
 
-.first_swap:
-    mov rdx, QWORD [rbp-8]
-    mov rdi, QWORD [rdx]
-    mov rax, [rdi + s_list.next]
+.base_swap:
+    mov rcx, QWORD [r14 + s_list.next]
+    mov QWORD [r13 + s_list.next], rcx
 
-    mov rcx, QWORD [rax + s_list.next]
-    mov QWORD [rdi + s_list.next], rcx
+    mov QWORD [r14 + s_list.next], r13
 
-    mov QWORD [rax + s_list.next], rdi
+    mov QWORD [r12], r14
 
-    mov QWORD [rdx], rax
 
 .loop:
-    mov r12, [r12 + s_list.next]
-    
+;     .iner_loop:
 
+;         mov r13, [r12 + s_list.next] ; TODO conditional move
+;     mov r12, [r12 + s_list.next]
+;     mov r13, [r12 + s_list.next]
 
 .return:
-    add rsp, 16
+    pop r14
+    pop r13
     pop r12
     pop r11
     pop rbp
