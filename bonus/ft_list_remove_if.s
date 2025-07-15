@@ -16,13 +16,19 @@ ft_list_remove_if:
     push r14 ; current s_list
     push r15 ; original pointer / prev s_list
 
+    mov  rax, rdx
+    and  rax, rsi
+    and  rax, rcx
+    and  rax, rdi
+    test rax, rax
+    jz .return
     mov rbx, rdx
     mov r12, rsi
     mov r13, rcx
     mov r15, rdi
     mov r14, [r15]
 
-.cmp_first_elem:
+.check_head:
 
     test r14, r14
     jz .return
@@ -31,11 +37,11 @@ ft_list_remove_if:
     mov rsi, r12
     call rbx ; cmp
     test rax, rax
-    jz .free_first_elem
-    jmp .pre_std_cmp
+    jz .free_head
+    jmp .pre_check_next
 
 
-.free_first_elem:
+.free_head:
     mov rdi, [r14]
     call r13 ; free_fct
 
@@ -46,13 +52,13 @@ ft_list_remove_if:
     call free wrt ..plt
 
     mov r14, [r15]
-    jmp .cmp_first_elem
+    jmp .check_head
 
-.pre_std_cmp:
+.pre_check_next:
     mov r15, [r15]
     mov r14, [r14 + s_list.next]
 
-.std_cmp:
+.check_next:
 
     test r14, r14
     jz .return
@@ -61,15 +67,14 @@ ft_list_remove_if:
     mov rsi, r12
     call rbx ; cmp
     test rax, rax
-    jz .free_std_elem
-    jmp .next_elem
+    jz .free_curr
 
 .next_elem:
     mov r15, r14
     mov r14, [r14 + s_list.next]
-    jmp .std_cmp
+    jmp .check_next
 
-.free_std_elem:
+.free_curr:
     mov rdi, [r14]
     call r13 ; free_fct
 
@@ -78,7 +83,7 @@ ft_list_remove_if:
     mov [r15 + s_list.next], r14
     call free wrt ..plt
 
-    jmp .std_cmp
+    jmp .check_next
 
 
 .return:
