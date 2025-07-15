@@ -16,9 +16,10 @@ int is_sup(const int* a, const int* b)
 int main(int argc, char const *argv[])
 {
     t_list *list = NULL;
-    int p3 = 50;
-    int p2 = 5;
-    int p1 = 10;
+    t_list *tmp = NULL;
+    int p3 = 2;
+    int p2 = 50;
+    int p1 = 1;
 
     ft_list_push_front(&list, &p3);
     ft_list_push_front(&list, &p2);
@@ -31,7 +32,9 @@ int main(int argc, char const *argv[])
     {
         printf("%i: %i\n", index, *(int*)list->data);
         index++;
+        tmp = list;
         list = list->next;
+        free(tmp);
     }
 
     return (0);
