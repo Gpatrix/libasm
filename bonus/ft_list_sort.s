@@ -9,12 +9,12 @@ section .text
 ft_list_sort:
     push rbp
     mov rbp, rsp
-    push r11 ; ptr to fonction
+    push r12 ; ptr to fonction
     push r13 ; 1nd s_list
     push r14 ; 2nd s_list
 
 
-    mov r11, rsi
+    mov r12, rsi
     mov r13, [rdi]
     test r13, r13
     jz .return
@@ -30,7 +30,7 @@ ft_list_sort:
 
         mov rdi, QWORD [r13]
         mov rsi, QWORD [r14]
-        call r11
+        call r12
 
         cmp rax, 0
         jg .swap
@@ -58,7 +58,7 @@ ft_list_sort:
 .return:
     pop r14
     pop r13
-    pop r11
+    pop r12
     pop rbp
     ret
 

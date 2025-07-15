@@ -6,26 +6,36 @@
 #include "mandatory/libasm.h"
 #include "bonus/libasm_bonus.h"
 
-// ft_list_sort
-
-int is_sup(const int* a, const int* b)
+// ft_list_remove_if
+int is_equ(const int* a, const int* b)
 {
-    return (*a > *b);
+    return (*a == *b);
+}
+
+void funct_free(void *ptr)
+{
+    free(ptr);
 }
 
 int main(int argc, char const *argv[])
 {
     t_list *list = NULL;
     t_list *tmp = NULL;
-    int p3 = 2;
-    int p2 = 50;
-    int p1 = 1;
+    int ref = 42;
+    int *int_array[3];
+    int_array[0] = malloc(sizeof(int));
+    int_array[1] = malloc(sizeof(int));
+    int_array[2] = malloc(sizeof(int));
 
-    ft_list_push_front(&list, &p3);
-    ft_list_push_front(&list, &p2);
-    ft_list_push_front(&list, &p1);
+    *int_array[0] = 42;
+    *int_array[1] = 50;
+    *int_array[2] = 42;
 
-    ft_list_sort(&list, is_sup);
+    ft_list_push_front(&list, int_array[0]);
+    ft_list_push_front(&list, int_array[1]);
+    ft_list_push_front(&list, int_array[2]);
+
+    ft_list_remove_if(&list, &ref, is_equ, funct_free) ;
 
     int index = 1;
     while (list != NULL)
@@ -34,11 +44,46 @@ int main(int argc, char const *argv[])
         index++;
         tmp = list;
         list = list->next;
-        free(tmp);
+        // free(tmp);
     }
 
     return (0);
 }
+
+
+
+// // ft_list_sort
+// int is_sup(const int* a, const int* b)
+// {
+//     return (*a > *b);
+// }
+
+// int main(int argc, char const *argv[])
+// {
+//     t_list *list = NULL;
+//     t_list *tmp = NULL;
+//     int p3 = 2;
+//     int p2 = 50;
+//     int p1 = 1;
+
+//     ft_list_push_front(&list, &p3);
+//     ft_list_push_front(&list, &p2);
+//     ft_list_push_front(&list, &p1);
+
+//     ft_list_sort(&list, is_sup);
+
+//     int index = 1;
+//     while (list != NULL)
+//     {
+//         printf("%i: %i\n", index, *(int*)list->data);
+//         index++;
+//         tmp = list;
+//         list = list->next;
+//         free(tmp);
+//     }
+
+//     return (0);
+// }
 
 // // ft_list_push_front
 // int main(int argc, char const *argv[])
