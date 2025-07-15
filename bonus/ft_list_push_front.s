@@ -61,3 +61,5 @@ ft_list_push_front:
     add rsp, 16
     pop rbp
     ret
+
+section .note.GNU-stack noalloc noexec nowrite progbits

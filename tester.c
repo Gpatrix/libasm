@@ -7,21 +7,32 @@
 #include "bonus/libasm_bonus.h"
 
 // ft_list_sort
+
+int is_sup(const int* a, const int* b)
+{
+    return (*a > *b);
+}
+
 int main(int argc, char const *argv[])
 {
     t_list *list = NULL;
-    char v1[] = "50";
-    char v2[] = "10";
-    char v3[] = "42";
+    int p3 = 50;
+    int p2 = 5;
+    int p1 = 10;
 
-    ft_list_push_front(&list, &v1[0]);
-    ft_list_push_front(&list, &v2[0]);
-    ft_list_push_front(&list, &v3[0]);
+    ft_list_push_front(&list, &p3);
+    ft_list_push_front(&list, &p2);
+    ft_list_push_front(&list, &p1);
 
-    ft_list_sort(&list, ft_strcmp);
+    ft_list_sort(&list, is_sup);
 
-    printf("1: %s\n2: %s\n3: %s\n",
-        (char*)list->data, (char*)list->next->data, (char*)list->next->next->data);
+    int index = 1;
+    while (list != NULL)
+    {
+        printf("%i: %i\n", index, *(int*)list->data);
+        index++;
+        list = list->next;
+    }
 
     return (0);
 }
@@ -31,7 +42,7 @@ int main(int argc, char const *argv[])
 // {
 //     t_list *list = NULL;
 //     int var = 42;
-   
+
 
 //     ft_list_push_front(&list, &var);
 //     ft_list_push_front(&list, &var);

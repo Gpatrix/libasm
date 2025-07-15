@@ -1,6 +1,5 @@
 ; void ft_list_sort(t_list **begin_list, int (*cmp)(void*, void*));
 
-extern malloc
 %include "s_list.s"
 
 global ft_list_sort
@@ -19,13 +18,11 @@ ft_list_sort:
     mov r11, rsi
     mov r12, rdi
     mov r13, [r12]
-    mov r14, r13
-    mov r15, r13
+    mov r14, QWORD [r13 + s_list.next]
+    mov r15, r14
 
 .base_sort:
 
-    mov r15, r14
-    mov r14, QWORD [r14 + s_list.next]
     test r14, r14
     jz .loop
 
@@ -35,7 +32,12 @@ ft_list_sort:
 
     cmp rax, 0
     jg .base_swap
+
+.end_base_loop:
+    mov r15, r14
+    mov r14, QWORD [r14 + s_list.next]
     jmp .base_sort
+
 
 .base_swap:
     mov rdi, QWORD [r13 + s_list.next]
@@ -49,7 +51,7 @@ ft_list_sort:
     mov rax, r13
     mov r13, r14
     mov r14, rax
-    jmp .base_sort
+    jmp .end_base_loop
 
 .loop:
 ;     .iner_loop:
@@ -66,3 +68,5 @@ ft_list_sort:
     pop r11
     pop rbp
     ret
+
+section .note.GNU-stack noalloc noexec nowrite progbits
