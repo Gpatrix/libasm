@@ -7,9 +7,9 @@
 #include "bonus/libasm_bonus.h"
 
 // ft_list_remove_if
-int is_equ(const int* a, const int* b)
+int is_not_equ(const int* a, const int* b)
 {
-    return (*a == *b);
+    return (*a != *b);
 }
 
 void funct_free(void *ptr)
@@ -28,14 +28,14 @@ int main(int argc, char const *argv[])
     int_array[2] = malloc(sizeof(int));
 
     *int_array[0] = 42;
-    *int_array[1] = 50;
+    *int_array[1] = 24;
     *int_array[2] = 42;
 
     ft_list_push_front(&list, int_array[0]);
     ft_list_push_front(&list, int_array[1]);
     ft_list_push_front(&list, int_array[2]);
 
-    ft_list_remove_if(&list, &ref, is_equ, funct_free) ;
+    ft_list_remove_if(&list, &ref, is_not_equ, funct_free) ;
 
     int index = 1;
     while (list != NULL)
@@ -44,7 +44,8 @@ int main(int argc, char const *argv[])
         index++;
         tmp = list;
         list = list->next;
-        // free(tmp);
+        free(tmp->data);
+        free(tmp);
     }
 
     return (0);

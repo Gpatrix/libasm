@@ -24,11 +24,15 @@ ft_list_remove_if:
 
 .cmp_first_elem:
 
+    test r14, r14
+    jz .return
+
     mov rdi, [r14]
     mov rsi, r12
     call rbx ; cmp
     test rax, rax
     jz .free_first_elem
+    jmp .pre_std_cmp
 
 
 .free_first_elem:
@@ -39,10 +43,42 @@ ft_list_remove_if:
     mov [r15], rax
 
     mov rdi, r14
-    ; call free wrt ..plt
+    call free wrt ..plt
 
     mov r14, [r15]
     jmp .cmp_first_elem
+
+.pre_std_cmp:
+    mov r15, [r15]
+    mov r14, [r14 + s_list.next]
+
+.std_cmp:
+
+    test r14, r14
+    jz .return
+
+    mov rdi, [r14]
+    mov rsi, r12
+    call rbx ; cmp
+    test rax, rax
+    jz .free_std_elem
+    jmp .next_elem
+
+.next_elem:
+    mov r15, r14
+    mov r14, [r14 + s_list.next]
+    jmp .std_cmp
+
+.free_std_elem:
+    mov rdi, [r14]
+    call r13 ; free_fct
+
+    mov rdi, r14
+    mov r14, [r14 + s_list.next]
+    mov [r15 + s_list.next], r14
+    call free wrt ..plt
+
+    jmp .std_cmp
 
 
 .return:
