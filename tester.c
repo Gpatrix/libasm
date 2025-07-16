@@ -6,50 +6,67 @@
 #include "mandatory/libasm.h"
 #include "bonus/libasm_bonus.h"
 
-// ft_list_remove_if
-int is_not_equ(const int* a, const int* b)
+
+// So if "12" is read in base "0123456789ABCDE", it should be:
+
+//     '1' → value 1
+
+//     '2' → value 2
+
+//     Result: 1 * base + 2 = 1 * 15 + 2 = 17
+int main(void)
 {
-    return (*a != *b);
+    char nb[] = "12";
+    char base[] = "0123456789ABCDE";
+    printf("%s\n%s\n%i\n", nb, base, ft_atoi_base(nb, base));
+    return 0;
 }
 
-void funct_free(void *ptr)
-{
-    free(ptr);
-}
 
-int main(int argc, char const *argv[])
-{
-    t_list *list = NULL;
-    t_list *tmp = NULL;
-    int ref = 42;
-    int *int_array[3];
-    int_array[0] = malloc(sizeof(int));
-    int_array[1] = malloc(sizeof(int));
-    int_array[2] = malloc(sizeof(int));
+// // ft_list_remove_if
+// int is_not_equ(const int* a, const int* b)
+// {
+//     return (*a != *b);
+// }
 
-    *int_array[0] = 42;
-    *int_array[1] = 24;
-    *int_array[2] = 42;
+// void funct_free(void *ptr)
+// {
+//     free(ptr);
+// }
 
-    ft_list_push_front(&list, int_array[0]);
-    ft_list_push_front(&list, int_array[1]);
-    ft_list_push_front(&list, int_array[2]);
+// int main(int argc, char const *argv[])
+// {
+//     t_list *list = NULL;
+//     t_list *tmp = NULL;
+//     int ref = 42;
+//     int *int_array[3];
+//     int_array[0] = malloc(sizeof(int));
+//     int_array[1] = malloc(sizeof(int));
+//     int_array[2] = malloc(sizeof(int));
 
-    ft_list_remove_if(&list, &ref, is_not_equ, funct_free) ;
+//     *int_array[0] = 42;
+//     *int_array[1] = 24;
+//     *int_array[2] = 42;
 
-    int index = 1;
-    while (list != NULL)
-    {
-        printf("%i: %i\n", index, *(int*)list->data);
-        index++;
-        tmp = list;
-        list = list->next;
-        free(tmp->data);
-        free(tmp);
-    }
+//     ft_list_push_front(&list, int_array[0]);
+//     ft_list_push_front(&list, int_array[1]);
+//     ft_list_push_front(&list, int_array[2]);
 
-    return (0);
-}
+//     ft_list_remove_if(&list, &ref, is_not_equ, funct_free) ;
+
+//     int index = 1;
+//     while (list != NULL)
+//     {
+//         printf("%i: %i\n", index, *(int*)list->data);
+//         index++;
+//         tmp = list;
+//         list = list->next;
+//         free(tmp->data);
+//         free(tmp);
+//     }
+
+//     return (0);
+// }
 
 
 
