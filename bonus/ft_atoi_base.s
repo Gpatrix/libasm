@@ -32,26 +32,45 @@ get_char_place:
     mov rcx, rdx
     ret
 
-; r11 str_len
+skip_white:
+    movzx r8d, byte [r11]
+    test r8b, r8b
+    jz .exit
+    lea r9d, [r8-9]
+    cmp r9b, 4
+    jbe .next
+    cmp r8b, 32
+    jne .exit
+
+.next:
+    inc r11
+    jmp skip_white
+
+.exit:
+    ret
+
 ft_atoi_base:
     push rbp
     mov rbp, rsp
     push r11 ; str ptr
     push r12 ; base ptr
     push r13 ; str_len
+    push r14 ; sign
 
     mov r11, rdi
     mov r12, rsi
     mov rdi, rsi
+    mov r14, 1
 
     call ft_strlen
     mov r13, rax
     xor rax, rax
 
+    call skip_white
+
 .loop:
     cmp [r11], byte 0
     je .return
-
 
     call get_char_place
 
@@ -69,6 +88,8 @@ ft_atoi_base:
     xor rax, rax
 
 .return:
+    imul rax, r14
+    pop r14
     pop r13
     pop r12
     pop r11
