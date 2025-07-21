@@ -5,4 +5,4 @@
 *.out
 *.pdf
 *.a
-**/42libasm_tester/**
+.gdb_history

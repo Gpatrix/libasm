@@ -52,7 +52,7 @@ skip_whitespace:
 
 .next:
     inc r11
-    jmp skip_white
+    jmp skip_whitespace
 
 get_sign:
     mov r8b, byte [r11]
@@ -125,7 +125,7 @@ ft_atoi_base:
     test rax, rax
     jnz .return_error
 
-    call skip_white
+    call skip_whitespace
     call get_sign
 
 .loop:

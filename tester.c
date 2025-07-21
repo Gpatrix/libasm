@@ -6,7 +6,7 @@
 #include "mandatory/libasm.h"
 #include "bonus/libasm_bonus.h"
 
-
+// ft_atoi_base
 int main(void)
 {
     char nb[] = "--101";
@@ -15,7 +15,7 @@ int main(void)
     return 0;
 }
 
-// // ft_list_remove_if
+// ft_list_remove_if
 // int is_not_equ(const int* a, const int* b)
 // {
 //     return (*a != *b);
@@ -30,26 +30,17 @@ int main(void)
 // {
 //     t_list *list = NULL;
 //     t_list *tmp = NULL;
-//     int ref = 42;
-//     int *int_array[3];
-//     int_array[0] = malloc(sizeof(int));
-//     int_array[1] = malloc(sizeof(int));
-//     int_array[2] = malloc(sizeof(int));
 
-//     *int_array[0] = 42;
-//     *int_array[1] = 24;
-//     *int_array[2] = 42;
+//     ft_list_push_front(&list, ft_strdup("bread"));
+//     ft_list_push_front(&list, ft_strdup("milk"));
+//     ft_list_push_front(&list, ft_strdup("apple"));
 
-//     ft_list_push_front(&list, int_array[0]);
-//     ft_list_push_front(&list, int_array[1]);
-//     ft_list_push_front(&list, int_array[2]);
-
-//     ft_list_remove_if(&list, &ref, is_not_equ, funct_free) ;
+//     ft_list_remove_if(&list, "milk", strcmp, funct_free);
 
 //     int index = 1;
 //     while (list != NULL)
 //     {
-//         printf("%i: %i\n", index, *(int*)list->data);
+//         printf("%i: %s\n", index, (char*)list->data);
 //         index++;
 //         tmp = list;
 //         list = list->next;
@@ -59,8 +50,6 @@ int main(void)
 
 //     return (0);
 // }
-
-
 
 // // ft_list_sort
 // int is_sup(const int* a, const int* b)
