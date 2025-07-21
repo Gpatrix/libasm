@@ -5,6 +5,13 @@ global ft_atoi_base
 
 section .text
 
+; 1.char, 2.tmp_reg, 3.jump
+%macro is_whitespace 3
+    lea %2d, [%1 - 9]
+    cmp %2b, 4
+    jbe %3
+%endmacro
+
 get_char_place:
 
     mov rdx, r12
@@ -36,10 +43,8 @@ skip_white:
     movzx r8d, byte [r11]
     test r8b, r8b
     jz .exit
-    lea r9d, [r8-9]
-    cmp r9b, 4
-    jbe .next
-    cmp r8b, 32
+    is_whitespace  r8, r9, .next
+    cmp r8b, ' '
     jne .exit
 
 .next:
@@ -48,7 +53,6 @@ skip_white:
 
 .exit:
     ret
-
 
 get_sign:
     mov r8b, byte [r11]
@@ -61,6 +65,42 @@ get_sign:
 .increment:
     inc r11
 
+.return:
+    ret
+
+
+verif_base:
+    cmp r13, 1
+    jle .error
+    mov rcx, r12
+    ; mov r10, rcx
+    ; inc r10
+    lea r10, [rcx + 1]
+
+.outer_loop:
+    movzx r8d, byte [rcx]
+    test r8d, r8d
+    jz .return
+    is_whitespace  r8, r9, .error
+    cmp r8b, '+'
+    je .error
+    cmp r8b, '-'
+    je .error
+
+    .iner_loop:
+        cmp r8b, byte [r10]
+        je .error
+        inc r10
+        cmp [r10], byte 0
+        jne .iner_loop
+
+.outer_loop_end:
+    inc rcx
+    lea r10, [rcx + 1]
+    jmp .outer_loop
+
+.error:
+    mov rax, 1
 .return:
     ret
 
@@ -80,6 +120,10 @@ ft_atoi_base:
     call ft_strlen
     mov r13, rax
     xor rax, rax
+
+    call verif_base
+    test rax, rax
+    jnz .return_error
 
     call skip_white
     call get_sign
