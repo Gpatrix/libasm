@@ -16,8 +16,8 @@
 //     Result: 1 * base + 2 = 1 * 15 + 2 = 17
 int main(void)
 {
-    char nb[] = "12";
-    char base[] = "0123456789ABCDE";
+    char nb[] = "123";
+    char base[] = "0123456789ABCDEF";
     printf("%s\n%s\n%i\n", nb, base, ft_atoi_base(nb, base));
     return 0;
 }

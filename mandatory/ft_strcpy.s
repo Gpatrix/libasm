@@ -14,7 +14,6 @@ ft_strcpy:
 
 .terminator:
     mov [rdi], byte 0
-    jmp .return
 
 .return:
     ret
