@@ -49,6 +49,21 @@ skip_white:
 .exit:
     ret
 
+
+get_sign:
+    mov r8b, byte [r11]
+    cmp r8b, '+'
+    je .increment
+    cmp r8b, '-'
+    jne .return
+    mov r14, -1
+
+.increment:
+    inc r11
+
+.return:
+    ret
+
 ft_atoi_base:
     push rbp
     mov rbp, rsp
@@ -67,13 +82,13 @@ ft_atoi_base:
     xor rax, rax
 
     call skip_white
+    call get_sign
 
 .loop:
     cmp [r11], byte 0
     je .return
 
     call get_char_place
-
     cmp rcx, -1
     je .return
 
