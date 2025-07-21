@@ -5,20 +5,47 @@ global ft_atoi_base
 
 section .text
 
+get_char_place:
+
+    mov rdx, r12
+    mov rcx, rdx
+    movzx rdi, byte [r11]
+
+.loop:
+    movzx r8, byte [rdx]
+
+    test r8, r8
+    jz .not_found
+
+    cmp rdi, r8
+    je .get_place
+
+    inc rdx
+    jmp .loop
+
+.not_found:
+    mov rcx, -1
+    ret
+
+.get_place:
+    sub rdx, rcx
+    mov rcx, rdx
+    ret
+
 ; r11 str_len
 ft_atoi_base:
     push rbp
     mov rbp, rsp
-    push r11
-    push r12
-    push r13
+    push r11 ; str ptr
+    push r12 ; base ptr
+    push r13 ; str_len
 
-    mov r11, rdi ; str ptr
-    mov r12, rsi ; base ptr
+    mov r11, rdi
+    mov r12, rsi
     mov rdi, rsi
 
     call ft_strlen
-    mov r13, rax ; str_len
+    mov r13, rax
     xor rax, rax
 
 .loop:
@@ -26,13 +53,20 @@ ft_atoi_base:
     je .return
 
     imul rax, r13
-    mov dil, byte [r11]
-    sub dil, '0'
-    movzx rdi, dil
-    add rax, rdi
+
+    call get_char_place
+
+    cmp rcx, -1
+    je .return_error
+
+.add_value:
+    add rax, rcx
 
     inc r11
     jmp .loop
+
+.return_error:
+    xor rax, rax
 
 .return:
     pop r13
