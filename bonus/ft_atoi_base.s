@@ -82,10 +82,9 @@ verif_base:
     je .error
     cmp r8b, '-'
     je .error
-    mov r8b, byte [r10]
-    test r8b, r8b
+    mov dl, byte [r10]
+    test dl, dl
     jz .return
-    movzx r8d, byte [rcx]
 
     .iner_loop:
         cmp r8b, byte [r10]
