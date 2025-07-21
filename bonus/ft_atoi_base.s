@@ -73,8 +73,6 @@ verif_base:
     cmp r13, 1
     jle .error
     mov rcx, r12
-    ; mov r10, rcx
-    ; inc r10
     lea r10, [rcx + 1]
 
 .outer_loop:
