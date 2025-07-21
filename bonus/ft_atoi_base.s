@@ -76,9 +76,10 @@ verif_base:
     lea r10, [rcx + 1]
 
 .outer_loop:
-    movzx r8d, byte [rcx]
-    test r8d, r8d
+    mov r8b, byte [r10]
+    test r8b, r8b
     jz .return
+    movzx r8d, byte [rcx]
     is_whitespace  r8, r9, .error
     cmp r8b, '+'
     je .error

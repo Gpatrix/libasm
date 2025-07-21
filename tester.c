@@ -7,13 +7,13 @@
 #include "bonus/libasm_bonus.h"
 
 
-// int main(void)
-// {
-//     char nb[] = "   -1E2";
-//     char base[] = "0123456789ABCDEF";
-//     printf("%s\n%s\n%i\n", nb, base, ft_atoi_base(nb, base));
-//     return 0;
-// }
+int main(void)
+{
+    char nb[] = "101";
+    char base[] = "01";
+    printf("%s\n%s\n%i\n", nb, base, ft_atoi_base(nb, base));
+    return 0;
+}
 
 // // ft_list_remove_if
 // int is_not_equ(const int* a, const int* b)
