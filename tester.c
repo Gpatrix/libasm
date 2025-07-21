@@ -7,21 +7,13 @@
 #include "bonus/libasm_bonus.h"
 
 
-// So if "12" is read in base "0123456789ABCDE", it should be:
-
-//     '1' → value 1
-
-//     '2' → value 2
-
-//     Result: 1 * base + 2 = 1 * 15 + 2 = 17
-int main(void)
-{
-    char nb[] = "   -1E2";
-    char base[] = "0123456789ABCDEF";
-    printf("%s\n%s\n%i\n", nb, base, ft_atoi_base(nb, base));
-    return 0;
-}
-
+// int main(void)
+// {
+//     char nb[] = "   -1E2";
+//     char base[] = "0123456789ABCDEF";
+//     printf("%s\n%s\n%i\n", nb, base, ft_atoi_base(nb, base));
+//     return 0;
+// }
 
 // // ft_list_remove_if
 // int is_not_equ(const int* a, const int* b)
