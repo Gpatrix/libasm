@@ -52,14 +52,14 @@ ft_atoi_base:
     cmp [r11], byte 0
     je .return
 
-    imul rax, r13
 
     call get_char_place
 
     cmp rcx, -1
-    je .return_error
+    je .return
 
 .add_value:
+    imul rax, r13
     add rax, rcx
 
     inc r11
