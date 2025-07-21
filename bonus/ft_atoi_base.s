@@ -10,6 +10,8 @@ section .text
     lea %2d, [%1 - 9]
     cmp %2b, 4
     jbe %3
+    cmp %1b, ' '
+    je %3
 %endmacro
 
 get_char_place:
@@ -39,20 +41,18 @@ get_char_place:
     mov rcx, rdx
     ret
 
-skip_white:
+skip_whitespace:
     movzx r8d, byte [r11]
     test r8b, r8b
     jz .exit
     is_whitespace  r8, r9, .next
-    cmp r8b, ' '
-    jne .exit
+
+.exit:
+    ret
 
 .next:
     inc r11
     jmp skip_white
-
-.exit:
-    ret
 
 get_sign:
     mov r8b, byte [r11]
@@ -60,10 +60,11 @@ get_sign:
     je .increment
     cmp r8b, '-'
     jne .return
-    mov r14, -1
+    neg r14
 
 .increment:
     inc r11
+    jmp get_sign
 
 .return:
     ret

@@ -9,8 +9,8 @@
 
 int main(void)
 {
-    char nb[] = "101";
-    char base[] = "01";
+    char nb[] = "--101";
+    char base[] = "0123456789";
     printf("%s\n%s\n%i\n", nb, base, ft_atoi_base(nb, base));
     return 0;
 }
