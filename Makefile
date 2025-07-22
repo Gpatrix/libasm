@@ -36,7 +36,7 @@ $(BONUS_FLAG): $(MANDATORY_OBJS) $(BONUS_OBJS)
 	ranlib $(NAME)
 	@touch $(BONUS_FLAG)
 
-tester: $(BONUS_FLAG)
+tester: tester.c $(BONUS_FLAG)
 	gcc -g -o tester tester.c -L. -l:libasm.a
 
 clean:

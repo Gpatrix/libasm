@@ -32,7 +32,7 @@ ft_list_sort:
         mov rsi, QWORD [r14]
         call r12
 
-        cmp rax, 0
+        cmp eax, 0
         jg .swap
 
     .end_iner_loop:
