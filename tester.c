@@ -11,6 +11,10 @@ void free_function(void *data) {
     free(data);
 }
 
+int cmp_function(void *data1, void *data2) {
+    return strcmp((char *)data1, (char *)data2);
+}
+
 // Test function for ft_strlen
 void test_ft_strlen() {
     printf("Testing ft_strlen:\n");
