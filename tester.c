@@ -11,10 +11,6 @@ void free_function(void *data) {
     free(data);
 }
 
-int cmp_function(void *data1, void *data2) {
-    return strcmp((char *)data1, (char *)data2);
-}
-
 // Test function for ft_strlen
 void test_ft_strlen() {
     printf("Testing ft_strlen:\n");
@@ -140,16 +136,16 @@ void test_ft_atoi_base() {
 }
 
 int main() {
-    // test_ft_strlen();
-    // test_ft_strcpy();
-    // test_ft_strcmp();
-    // test_ft_strdup();
-    // test_ft_write();
-    // test_ft_read();
-    // test_ft_list_push_front_and_size();
+    test_ft_strlen();
+    test_ft_strcpy();
+    test_ft_strcmp();
+    test_ft_strdup();
+    test_ft_write();
+    test_ft_read();
+    test_ft_list_push_front_and_size();
     test_ft_list_sort();
-    // test_ft_list_remove_if();
-    // test_ft_atoi_base();
+    test_ft_list_remove_if();
+    test_ft_atoi_base();
     return 0;
 }
 

@@ -36,7 +36,7 @@ ft_list_remove_if:
     mov rdi, [r14]
     mov rsi, r12
     call rbx ; cmp
-    test rax, rax
+    test eax, eax
     jz .free_head
     jmp .pre_check_next
 
@@ -66,7 +66,7 @@ ft_list_remove_if:
     mov rdi, [r14]
     mov rsi, r12
     call rbx ; cmp
-    test rax, rax
+    test eax, eax
     jz .free_curr
 
 .next_elem:
