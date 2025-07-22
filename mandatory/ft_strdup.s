@@ -1,3 +1,5 @@
+; char    *ft_strdup(const char *s);
+
 global ft_strdup
 
 extern malloc

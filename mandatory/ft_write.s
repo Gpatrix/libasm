@@ -1,3 +1,5 @@
+; ssize_t ft_write(int fd, const void *buf, size_t count);
+
 global ft_write
 
 extern __errno_location
