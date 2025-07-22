@@ -7,3 +7,4 @@
 *.a
 .gdb_history
 .bonus_done
+!Makefile
