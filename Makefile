@@ -36,8 +36,8 @@ $(BONUS_FLAG): $(MANDATORY_OBJS) $(BONUS_OBJS)
 	ranlib $(NAME)
 	@touch $(BONUS_FLAG)
 
-tester: tester.c $(BONUS_FLAG)
-	gcc -g -o tester tester.c -L. -l:libasm.a
+main: main.c $(BONUS_FLAG)
+	gcc -g -o main main.c -L. -l:libasm.a
 
 clean:
 	@$(RM) $(MANDATORY_OBJS)
@@ -46,7 +46,7 @@ clean:
 
 fclean: clean
 	@$(RM) $(NAME)
-	@$(RM) tester
+	@$(RM) main
 
 re: fclean all
 
